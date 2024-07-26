@@ -1,0 +1,7 @@
+# Ignore the entire mysql_data directory
+mysql_data/
+
+# Other common ignores
+.env
+*.log
+node_modules/
