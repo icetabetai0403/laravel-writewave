@@ -31,4 +31,6 @@
   @else
       <p>投稿はありません。</p>
   @endif
+
+  {{ $posts->links() }}
 @endsection

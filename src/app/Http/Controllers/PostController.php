@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->get();
+        $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
