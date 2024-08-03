@@ -23,6 +23,14 @@
           <label for="content">本文</label>
           <textarea id="content" name="content">{{ old('content') }}</textarea>
       </div>
+      <div>
+        <strong>Category:</strong>
+        <select name="category_id">
+        @foreach ($categories as $category)
+        <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+        </select>
+      </div>
       <button type="submit">投稿</button>
   </form>
 @endsection

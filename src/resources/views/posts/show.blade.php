@@ -12,6 +12,7 @@
   <article>
       <h2>{{ $post->title }}</h2>
       <p>{{ $post->content }}</p>
+      <p>カテゴリー：{{ $post->category->name }}</p>
       
       @auth
       <form method="POST" class="m-3 align-items-end">

@@ -24,6 +24,18 @@
           <label for="content">本文</label>
           <textarea id="content" name="content">{{ old('content', $post->content) }}</textarea>
       </div>
+      <div>
+        <strong>Category:</strong>
+        <select name="category_id">
+        @foreach ($categories as $category)
+            @if ($category->id == $post->category_id)
+                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+            @else
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endif
+        @endforeach
+        </select>
+      </div>
       <button type="submit">更新</button>
   </form>
 @endsection
