@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\Category;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -25,7 +26,9 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+
+        return view('posts.create', compact('categories'));
     }
 
     public function store(PostRequest $request)
@@ -33,6 +36,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->category_id = $request->input('category_id');
         $post->user_id = Auth::id();
         $post->save();
 
@@ -45,7 +49,9 @@ class PostController extends Controller
             return redirect()->route('posts.index')->with('error_message', '不正なアクセスです。');
         }
 
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     public function update(PostRequest $request, Post $post)
@@ -56,6 +62,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->category_id = $request->input('category_id');
         $post->save();
 
         return redirect()->route('posts.show', $post)->with('flash_message', '投稿を編集しました。');
