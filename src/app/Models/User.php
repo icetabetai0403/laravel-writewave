@@ -54,4 +54,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function favorite_posts()
+    {
+        return $this->belongsToMany(Post::class)->withTimestamps();
+    }
 }

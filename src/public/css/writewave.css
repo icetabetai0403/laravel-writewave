@@ -114,3 +114,14 @@ body.dark-mode {
 .dark-mode #main-footer a:hover {
     color: #7fbfff;
 }
+
+/* いいね */
+.writewave-favorite-button {
+    border-radius: 2px;
+    border: solid 1px #0fbe9f;
+    background-color: #ffffff;
+}
+
+.text-favorite {
+    color: #0fbe9f;
+}
