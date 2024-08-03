@@ -12,14 +12,40 @@
   <article>
       <h2>{{ $post->title }}</h2>
       <p>{{ $post->content }}</p>
+      
+      @auth
+      <form method="POST" class="m-3 align-items-end">
+          @csrf
+          <div>
+            @if(Auth::user()->favorite_posts()->where('post_id', $post->id)->exists())
+                <a href="{{ route('favorites.destroy', $post->id) }}" class="btn writewave-favorite-button text-favorite w-100" onclick="event.preventDefault(); document.getElementById('favorites-destroy-form').submit();">
+                    <i class="fas fa-thumbs-up"></i>
+                    いいね解除
+                </a>
+            @else
+                <a href="{{ route('favorites.store', $post->id) }}" class="btn writewave-favorite-button text-favorite w-100" onclick="event.preventDefault(); document.getElementById('favorites-store-form').submit();">
+                    <i class="fas fa-thumbs-up"></i>
+                    いいね
+                </a>
+            @endif
+          </div>
+        </form>
+        <form id="favorites-destroy-form" action="{{ route('favorites.destroy', $post->id) }}" method="POST" class="d-none">
+            @csrf
+            @method('DELETE')
+        </form>
+        <form id="favorites-store-form" action="{{ route('favorites.store', $post->id) }}" method="POST" class="d-none">
+            @csrf
+      </form>
+      @endauth
 
       <div class="row">
-          @foreach($comments as $comment)
-          <div class="offset-md-5 col-md-5">
-              <p class="h3">{{$comment->content}}</p>
-              <label>{{$comment->created_at}} {{$comment->user->name}}</label>
-          </div>
-          @endforeach
+        @foreach($comments as $comment)
+        <div class="offset-md-5 col-md-5">
+            <p class="h3">{{$comment->content}}</p>
+            <label>{{$comment->created_at}} {{$comment->user->name}}</label>
+        </div>
+        @endforeach
       </div><br />
 
       @auth
@@ -33,7 +59,7 @@
                   @enderror
                   <textarea name="content" class="form-control m-2"></textarea>
                   <input type="hidden" name="post_id" value="{{$post->id}}">
-                  <button type="submit" class="btn samuraimart-submit-button ml-2">コメントを追加</button>
+                  <button type="submit" class="btn writewave-submit-button ml-2">コメントを追加</button>
               </form>
           </div>
       </div>
