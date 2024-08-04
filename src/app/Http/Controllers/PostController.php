@@ -18,15 +18,15 @@ class PostController extends Controller
         $categories = Category::all();
 
         if ($request->category !== null) {
-            $posts = Post::where('category_id', $request->category)->paginate(10);
+            $posts = Post::where('category_id', $request->category)->sortable()->paginate(10);
             $total_count = Post::Where('category_id', $request->category)->count();
             $category = Category::find($request->category);
         } elseif ($keyword !== null) {
-            $posts = post::where('title', 'like', "%{$keyword}%")->paginate(10);
+            $posts = post::where('title', 'like', "%{$keyword}%")->sortable()->paginate(10);
             $total_count = $posts->total();
             $category = null;
         } else {
-            $posts = Post::paginate(10);
+            $posts = Post::sortable()->paginate(10);
             $total_count = "";
             $category = null;
         }

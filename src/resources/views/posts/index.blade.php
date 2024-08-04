@@ -22,6 +22,10 @@
                   <h1>"{{ $keyword }}"の検索結果{{$total_count}}件</h1>
               @endif
             </div>
+            <div>
+              Sort By
+              @sortablelink('created_at', '投稿日')
+            </div>
 
             @if (session('flash_message'))
                 <div class="alert alert-success">{{ session('flash_message') }}</div>
