@@ -40,9 +40,13 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('mypage') }}">
+                                マイページ
+                            </a>
+                            
                             <a class="dropdown-item" href="{{ route('logout') }}"
                               onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                 ログアウト
                             </a>
 
@@ -53,13 +57,13 @@
                     </li>
                 @endguest
                 <li class="nav-item d-flex align-items-center ms-3">
-                  <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="darkModeToggle">
-                      <label class="form-check-label" for="darkModeToggle">
-                          <i class="fas fa-sun"></i>
-                          <i class="fas fa-moon"></i>
-                      </label>
-                  </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                        <label class="form-check-label" for="darkModeToggle">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </label>
+                    </div>
                 </li>
             </ul>
         </div>
