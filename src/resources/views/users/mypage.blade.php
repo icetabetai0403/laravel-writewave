@@ -15,7 +15,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/100' }}" class="rounded-circle me-3" alt="プロフィール画像" style="width: 100px; height: 100px; object-fit: cover;">
+                    <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/100' }}" class="rounded-circle me-3" alt="プロフィール画像" style="width: 100px; height: 100px; object-fit: cover;">
                         <div>
                             <h2 class="h4 mb-0">{{ $user->name }}</h2>
                             <p class="text-muted mb-0">{{ $user->nickname }}</p>
@@ -37,10 +37,10 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
-                                <h4 class="h6 mb-0">注文履歴</h4>
-                                <small class="text-muted">注文履歴を確認できます</small>
+                                <h4 class="h6 mb-0">パスワード変更</h4>
+                                <small class="text-muted">パスワードを変更します</small>
                             </div>
-                            <a href="{{ route('mypage') }}" class="btn btn-outline-primary">確認</a>
+                            <a href="{{ route('mypage.edit_password') }}" class="btn btn-outline-primary">編集</a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
