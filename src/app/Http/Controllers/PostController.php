@@ -10,11 +10,28 @@ use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('posts.index', compact('posts'));
+        $keyword = $request->keyword;
+
+        $categories = Category::all();
+
+        if ($request->category !== null) {
+            $posts = Post::where('category_id', $request->category)->paginate(10);
+            $total_count = Post::Where('category_id', $request->category)->count();
+            $category = Category::find($request->category);
+        } elseif ($keyword !== null) {
+            $posts = post::where('title', 'like', "%{$keyword}%")->paginate(10);
+            $total_count = $posts->total();
+            $category = null;
+        } else {
+            $posts = Post::paginate(10);
+            $total_count = "";
+            $category = null;
+        }
+
+        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword'));
     }
 
     public function show(Post $post)

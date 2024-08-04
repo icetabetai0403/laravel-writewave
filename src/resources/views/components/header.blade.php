@@ -10,8 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="記事を検索..." aria-label="Search">
+                    <form action="{{ route('posts.index') }}" method="GET" class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="記事を検索..." aria-label="Search" name="keyword">
                         <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </li>

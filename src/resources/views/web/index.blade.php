@@ -5,18 +5,8 @@
     <div class="row">
         <!-- サイドバー -->
         <div class="col-lg-3 mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="h5 mb-0">カテゴリー</h2>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled">
-                        @foreach(['テクノロジー', 'ライフスタイル', 'トラベル', 'フード'] as $category)
-                            <li><a href="#" class="text-decoration-none">{{ $category }}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+            @component('components.sidebar', ['categories' => $categories])
+            @endcomponent
         </div>
 
         <!-- ブログ記事一覧 -->
