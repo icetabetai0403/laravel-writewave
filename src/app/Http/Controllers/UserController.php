@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -32,13 +33,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'nickname' => ['required', 'string', 'max:255'],
-            'profile_image' => ['nullable','image','max:2048'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-        ]);
-
         $user->name = $request->input('name') ? $request->input('name') : $user->name;
         $user->nickname = $request->input('nickname') ? $request->input('nickname') : $user->nickname;
         $user->email = $request->input('email') ? $request->input('email') : $user->email;
@@ -53,9 +47,32 @@ class UserController extends Controller
             $path = $request->file('profile_image')->store('profile_images', 'public');
             $user->profile_image = $path;
         }
-        
+
         $user->update();
 
         return to_route('mypage');
+    }
+
+    public function update_password(Request $request)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->input('password') == $request->input('password_confirmation')) {
+            $user->password = bcrypt($request->input('password'));
+            $user->update();
+        } else {
+            return to_route('mypage.edit_password');
+        }
+
+        return to_route('mypage');
+    }
+
+    public function edit_password()
+    {
+        return view('users.edit_password');
     }
 }
