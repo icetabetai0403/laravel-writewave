@@ -2,61 +2,55 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <h3 class="mt-3 mb-3">ログイン</h3>
+    <div class="row">
+        <!-- サイドバー -->
+        <div class="col-lg-3 mb-4">
+            <x-sidebar :categories="$categories" />
+        </div>
 
-            <hr>
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
+        <!-- ログインフォーム -->
+        <div class="col-lg-9">
+            <h1 class="mb-4">ログイン</h1>
 
-                <div class="form-group">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror samuraimart-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>メールアドレスが正しくない可能性があります。</strong>
-                    </span>
-                    @enderror
-                </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">メールアドレス</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <div class="invalid-feedback">メールアドレスが正しくない可能性があります。</div>
+                            @enderror
+                        </div>
 
-                <div class="form-group">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror samuraimart-login-input" name="password" required autocomplete="current-password" placeholder="パスワード">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">パスワード</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            @error('password')
+                                <div class="invalid-feedback">パスワードが正しくない可能性があります。</div>
+                            @enderror
+                        </div>
 
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>パスワードが正しくない可能性があります。</strong>
-                    </span>
-                    @enderror
-                </div>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="remember">次回から自動的にログインする</label>
+                        </div>
 
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <button type="submit" class="btn btn-primary">ログイン</button>
+                    </form>
 
-                        <label class="form-check-label samuraimart-check-label w-100" for="remember">
-                            次回から自動的にログインする
-                        </label>
+                    <div class="mt-3">
+                        <a href="{{ route('password.request') }}" class="text-decoration-none">パスワードをお忘れの場合</a>
+                    </div>
+
+                    <hr>
+
+                    <div class="text-center">
+                        <a href="{{ route('register') }}" class="btn btn-outline-primary">新規登録</a>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <button type="submit" class="mt-3 btn samuraimart-submit-button w-100">
-                        ログイン
-                    </button>
-
-                    <a class="btn btn-link mt-3 d-flex justify-content-center samuraimart-login-text" href="{{ route('password.request') }}">
-                        パスワードをお忘れの場合
-                    </a>
-                </div>
-            </form>
-
-            <hr>
-
-            <div class="form-group">
-                <a class="btn btn-link mt-3 d-flex justify-content-center samuraimart-login-text" href="{{ route('register') }}">
-                    新規登録
-                </a>
             </div>
         </div>
     </div>

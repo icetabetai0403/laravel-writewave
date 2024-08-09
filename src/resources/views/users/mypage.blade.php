@@ -18,7 +18,7 @@
                     <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/100' }}" class="rounded-circle me-3" alt="プロフィール画像" style="width: 100px; height: 100px; object-fit: cover;">
                         <div>
                             <h2 class="h4 mb-0">{{ $user->name }}</h2>
-                            <p class="text-muted mb-0">{{ $user->nickname }}</p>
+                            <p class="text-muted mb-0">ニックネーム：{{ $user->nickname }}</p>
                         </div>
                     </div>
                 </div>

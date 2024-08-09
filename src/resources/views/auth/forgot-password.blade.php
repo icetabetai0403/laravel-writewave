@@ -2,43 +2,41 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <h3 class="mt-3 mb-3">パスワード再設定</h3>
+    <div class="row">
+        <!-- サイドバー -->
+        <div class="col-lg-3 mb-4">
+            <x-sidebar :categories="$categories" />
+        </div>
 
-            <p>
-                ご登録時のメールアドレスを入力してください。<br>
-                パスワード再発行用のメールをお送りします。
-            </p>
+        <!-- パスワード再設定フォーム -->
+        <div class="col-lg-9">
+            <h1 class="mb-4">パスワード再設定</h1>
 
-            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">ご登録時のメールアドレスを入力してください。パスワード再発行用のメールをお送りします。</p>
 
-            @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">メールアドレス</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <div class="invalid-feedback">メールアドレスが正しくない可能性があります。</div>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">送信</button>
+                    </form>
+                </div>
             </div>
-            @endif
-
-
-            <form method="POST" action="{{ route('password.email') }}">
-                @csrf
-
-                <div class="form-group">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror samuraimart-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
-
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>メールアドレスが正しくない可能性があります。</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn samuraimart-submit-button w-100">
-                        送信
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
 </div>

@@ -84,4 +84,10 @@ class UserController extends Controller
 
         return view('users.favorite', compact('favorite_posts'));
     }
+
+    public function destroy(Request $request)
+    {
+        Auth::user()->delete();
+        return redirect('/');
+    }
 }
