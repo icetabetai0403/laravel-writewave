@@ -17,17 +17,20 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ $favorite_post->title }}</h3>
                         <p class="card-text">{{ Str::limit($favorite_post->content, 100) }}</p>
+                        <p class="text-muted">投稿日: {{ $favorite_post->created_at->format('Y-m-d H:i') }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('posts.show', $favorite_post->id) }}" class="btn btn-outline-primary">続きを読む</a>
+                            <a href="{{ route('posts.show', $favorite_post->id) }}" class="btn btn-outline-primary custom-btn">続きを読む</a>
                             <form action="{{ route('favorites.destroy', $favorite_post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-thumbs-up"></i> いいね解除</button>
+                                <button type="submit" class="btn btn-outline-danger custom-btn"><i class="fas fa-thumbs-up"></i> いいね解除</button>
                             </form>
                         </div>
                     </div>
                 </div>
             @endforeach
+
+            <a href="{{ route('mypage') }}" class="btn btn-secondary custom-btn mt-3">マイページに戻る</a>
         </div>
     </div>
 </div>

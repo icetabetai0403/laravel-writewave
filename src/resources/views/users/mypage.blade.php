@@ -28,26 +28,26 @@
                 <div class="card-body">
                     <h3 class="card-title">アカウント管理</h3>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3 pb-3">
                             <div>
                                 <h4 class="h6 mb-0">会員情報の編集</h4>
                                 <small class="text-muted">アカウント情報の編集</small>
                             </div>
-                            <a href="{{ route('mypage.edit') }}" class="btn btn-outline-primary">編集</a>
+                            <a href="{{ route('mypage.edit') }}" class="btn btn-outline-primary custom-btn">編集</a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3 pb-3">
                             <div>
                                 <h4 class="h6 mb-0">パスワード変更</h4>
                                 <small class="text-muted">パスワードを変更します</small>
                             </div>
-                            <a href="{{ route('mypage.edit_password') }}" class="btn btn-outline-primary">編集</a>
+                            <a href="{{ route('mypage.edit_password') }}" class="btn btn-outline-primary custom-btn">編集</a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center pt-3 pb-3">
                             <div>
                                 <h4 class="h6 mb-0">いいね一覧</h4>
                                 <small class="text-muted">いいねした投稿を確認します</small>
                             </div>
-                            <a href="{{ route('mypage.favorite') }}" class="btn btn-outline-primary">表示</a>
+                            <a href="{{ route('mypage.favorite') }}" class="btn btn-outline-primary custom-btn">表示</a>
                         </li>
                     </ul>
                 </div>

@@ -18,7 +18,7 @@ $categories = Category::all();
     <div class="card-body">
         <ul class="list-unstyled">
             @foreach($categories as $category)
-                <li><a href="{{ route('posts.index', ['category' => $category->id]) }}" class="text-decoration-none">{{ $category->name }}</a></li>
+                <li class="sidebar-list"><a href="{{ route('posts.index', ['category' => $category->id]) }}" class="text-decoration-none sidebar-text">{{ $category->name }}</a></li>
             @endforeach
         </ul>
     </div>
@@ -31,8 +31,8 @@ $categories = Category::all();
     <div class="card-body">
         <ul class="list-unstyled">
             @foreach($months as $month)
-                <li>
-                    <a href="{{ route('posts.index', ['year' => $month->year, 'month' => $month->month]) }}" class="text-decoration-none">
+                <li class="sidebar-list">
+                    <a href="{{ route('posts.index', ['year' => $month->year, 'month' => $month->month]) }}" class="text-decoration-none sidebar-text">
                         {{ $month->year }}年{{ $month->month }}月 ({{ $month->post_count }})
                     </a>
                 </li>

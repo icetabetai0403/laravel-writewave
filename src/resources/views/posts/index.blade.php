@@ -13,18 +13,24 @@
         <div class="col-lg-9">
             <h1 class="mb-4">投稿一覧</h1>
 
-            <div class="container">
+            <div class="container mb-3">
               @if ($category !== null)
-                  <a href="{{ route('posts.index') }}">トップ</a> > <a href="#">{{ $category->name }}</a>
-                  <h1>{{ $category->name }}の記事一覧{{$total_count}}件</h1>
-                  @elseif ($keyword !== null)
-                  <a href="{{ route('posts.index') }}">トップ</a> > 記事一覧
-                  <h1>"{{ $keyword }}"の検索結果{{$total_count}}件</h1>
+                  <h2 class="h4">{{ $category->name }}の記事一覧 ({{$total_count}}件)</h2>
+              @elseif ($keyword !== null)
+                  <h2 class="h4">"{{ $keyword }}"の検索結果 ({{$total_count}}件)</h2>
               @endif
             </div>
-            <div>
-              Sort By
-              @sortablelink('created_at', '投稿日')
+
+            <div class="d-flex mb-3 align-items-center">
+              <div>
+                <label for="sort-select">並び替え:</label>
+              </div>
+              <div>
+                <select id="sort-select" class="form-select custom-select ms-2" style="width: auto;">
+                      <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>新しい順</option>
+                      <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>古い順</option>
+                </select>
+              </div>
             </div>
 
             @if (session('flash_message'))
@@ -36,7 +42,7 @@
             @endif
 
             <div class="mb-3">
-                <a href="{{ route('posts.create') }}" class="btn btn-primary">新規投稿</a>
+                <a href="{{ route('posts.create') }}" class="btn btn-primary custom-btn">新規投稿</a>
             </div>
 
             @if($posts->isNotEmpty())
@@ -54,13 +60,13 @@
                             <p class="card-text">{{ Str::limit($post->content, 100) }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-primary me-2">続きを読む</a>
+                                    <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-primary custom-btn me-2">続きを読む</a>
                                     @if(Auth::id() === $post->user_id)
-                                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary me-2">編集</a>
+                                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary custom-btn me-2">編集</a>
                                         <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger">削除</button>
+                                            <button type="submit" class="btn btn-outline-danger custom-btn">削除</button>
                                         </form>
                                     @endif
                                 </div>
@@ -80,8 +86,23 @@
                 <p>投稿はありません。</p>
             @endif
 
-            {{ $posts->appends(request()->query())->links() }}
+            <div class="d-flex justify-content-center">
+                {{ $posts->appends(request()->query())->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('sort-select').addEventListener('change', function() {
+    var sortValue = this.value;
+    var currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('sort', sortValue);
+    
+    // 現在のページパラメータを削除
+    currentUrl.searchParams.delete('page');
+    
+    window.location.href = currentUrl.toString();
+});
+</script>
 @endsection

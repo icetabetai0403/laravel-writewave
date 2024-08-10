@@ -38,10 +38,15 @@ class PostController extends Controller
                     ->whereMonth('created_at', $request->month);
         }
 
-        $posts = $query->withCount(['favorite_users', 'comments'])->sortable()->paginate(10);
+        $sort = $request->input('sort', 'desc');
+        $direction = $sort === 'asc' ? 'asc' : 'desc';
+
+        $query->orderBy('created_at', $direction);
+
+        $posts = $query->withCount(['favorite_users', 'comments'])->paginate(10);
         $total_count = $posts->total();
 
-        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword', 'months'));
+        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword', 'months', 'sort'));
     }
 
     public function show(Post $post)

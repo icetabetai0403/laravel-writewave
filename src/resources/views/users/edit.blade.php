@@ -54,7 +54,7 @@
                             <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/100' }}" alt="現在のプロフィール画像" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary custom-btn">
                             保存
                         </button>
                     </form>
@@ -65,7 +65,7 @@
                 <div class="card-body">
                     <h5 class="card-title">アカウント削除</h5>
                     <p class="card-text">アカウントを削除すると、すべてのデータが永久に失われます。</p>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">
+                    <button type="button" class="btn btn-danger custom-btn" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">
                         退会する
                     </button>
                 </div>
@@ -93,6 +93,7 @@
                     </div>
                 </div>
             </div>
+            <a href="{{ route('mypage') }}" class="btn btn-secondary custom-btn mt-3">マイページに戻る</a>
         </div>
     </div>
 </div>

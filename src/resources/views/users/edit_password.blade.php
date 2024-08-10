@@ -31,12 +31,14 @@
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary custom-btn">
                             パスワード更新
                         </button>
                     </form>
                 </div>
             </div>
+
+            <a href="{{ route('mypage') }}" class="btn btn-secondary custom-btn mt-3">マイページに戻る</a>
         </div>
     </div>
 </div>
