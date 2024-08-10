@@ -54,7 +54,7 @@
                             <p class="card-text">{{ Str::limit($post->content, 100) }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-primary me-2">詳細</a>
+                                    <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-primary me-2">続きを読む</a>
                                     @if(Auth::id() === $post->user_id)
                                         <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary me-2">編集</a>
                                         <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
