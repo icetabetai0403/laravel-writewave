@@ -49,16 +49,6 @@
                             </div>
                             <a href="{{ route('mypage.favorite') }}" class="btn btn-outline-primary">表示</a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="h6 mb-0">ログアウト</h4>
-                                <small class="text-muted">ログアウトします</small>
-                            </div>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-danger">ログアウト</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
                     </ul>
                 </div>
             </div>

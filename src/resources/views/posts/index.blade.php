@@ -39,18 +39,6 @@
                 <a href="{{ route('posts.create') }}" class="btn btn-primary">新規投稿</a>
             </div>
 
-            <ul class="nav nav-tabs mb-4">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">最新</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">トレンド</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">フォロー中</a>
-                </li>
-            </ul>
-
             @if($posts->isNotEmpty())
                 @foreach($posts as $post)
                     <div class="card mb-4">
@@ -76,17 +64,14 @@
                                         </form>
                                     @endif
                                 </div>
-                                <div>
-                                    <button class="btn btn-sm btn-outline-secondary me-2">
-                                        <i class="fas fa-thumbs-up"></i> {{ rand(1, 100) }}
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-secondary me-2">
-                                        <i class="fas fa-comment"></i> {{ rand(1, 20) }}
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-share"></i>
-                                    </button>
-                                </div>
+                                <div class="d-flex">
+                                  <div class="me-2">
+                                      <i class="fas fa-thumbs-up"></i> {{ $post->favorite_users_count }}
+                                  </div>
+                                  <div class="me-2">
+                                      <i class="fas fa-comment"></i> {{ $post->comments_count }}
+                                  </div>
+                              </div>
                             </div>
                         </div>
                     </div>

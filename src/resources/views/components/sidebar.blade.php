@@ -1,3 +1,16 @@
+@php
+use App\Models\Post;
+use App\Models\Category;
+
+$months = Post::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as post_count')
+    ->groupBy('year', 'month')
+    ->orderByDesc('year')
+    ->orderByDesc('month')
+    ->get();
+
+$categories = Category::all();
+@endphp
+
 <div class="card mb-4">
     <div class="card-header">
         <h2 class="h5 mb-0">カテゴリー</h2>

@@ -15,11 +15,8 @@
                         <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-pen"></i></a>
+                <li class="nav-item ms-2">
+                    <a class="nav-link" href="{{ route('posts.create') }}"><i class="fas fa-pen"></i></a>
                 </li>
                 @guest
                     @if (Route::has('login'))
@@ -34,7 +31,7 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ms-2">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>

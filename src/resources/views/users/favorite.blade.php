@@ -22,7 +22,7 @@
                             <form action="{{ route('favorites.destroy', $favorite_post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger">いいね解除</button>
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-thumbs-up"></i> いいね解除</button>
                             </form>
                         </div>
                     </div>

@@ -38,7 +38,7 @@ class PostController extends Controller
                     ->whereMonth('created_at', $request->month);
         }
 
-        $posts = $query->sortable()->paginate(10);
+        $posts = $query->withCount(['favorite_users', 'comments'])->sortable()->paginate(10);
         $total_count = $posts->total();
 
         return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword', 'months'));
