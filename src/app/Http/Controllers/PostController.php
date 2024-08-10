@@ -12,26 +12,36 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-
         $keyword = $request->keyword;
-
         $categories = Category::all();
+        $months = Post::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as post_count')
+            ->groupBy('year', 'month')
+            ->orderByDesc('year')
+            ->orderByDesc('month')
+            ->get();
+
+        $query = Post::query();
 
         if ($request->category !== null) {
-            $posts = Post::where('category_id', $request->category)->sortable()->paginate(10);
-            $total_count = Post::Where('category_id', $request->category)->count();
+            $query->where('category_id', $request->category);
             $category = Category::find($request->category);
-        } elseif ($keyword !== null) {
-            $posts = post::where('title', 'like', "%{$keyword}%")->sortable()->paginate(10);
-            $total_count = $posts->total();
-            $category = null;
         } else {
-            $posts = Post::sortable()->paginate(10);
-            $total_count = "";
             $category = null;
         }
 
-        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword'));
+        if ($keyword !== null) {
+            $query->where('title', 'like', "%{$keyword}%");
+        }
+
+        if ($request->year && $request->month) {
+            $query->whereYear('created_at', $request->year)
+                    ->whereMonth('created_at', $request->month);
+        }
+
+        $posts = $query->sortable()->paginate(10);
+        $total_count = $posts->total();
+
+        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword', 'months'));
     }
 
     public function show(Post $post)

@@ -10,7 +10,15 @@
 
         <!-- 記事詳細 -->
         <div class="col-lg-9">
-            <h1 class="mb-4">{{ $post->title }}</h1>
+
+            <h1 class="mb-2">{{ $post->title }}</h1>
+            <div class="d-flex align-items-center mb-3">
+                <img src="{{ $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('images/default_profile.png') }}" class="rounded-circle me-3" alt="ユーザーアバター" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <h5 class="mb-0">{{ $post->user->nickname }}</h5>
+                    <small class="text-muted">{{ $post->created_at->format('Y年m月d日') }}</small>
+                </div>
+            </div>
 
             @if (session('flash_message'))
                 <div class="alert alert-success">
@@ -63,7 +71,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <p class="card-text">{{$comment->content}}</p>
-                    <p class="card-text"><small class="text-muted">{{$comment->created_at->format('Y-m-d H:i')}} by {{$comment->user->name}}</small></p>
+                    <p class="card-text"><small class="text-muted">{{$comment->created_at->format('Y年m月d日')}} by {{$comment->user->nickname}}</small></p>
                 </div>
             </div>
             @endforeach

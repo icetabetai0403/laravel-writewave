@@ -5,7 +5,7 @@
     <div class="row">
         <!-- サイドバー -->
         <div class="col-lg-3 mb-4">
-            @component('components.sidebar', ['categories' => $categories])
+            @component('components.sidebar', ['categories' => $categories, 'months' => $months])
             @endcomponent
         </div>
 
@@ -56,9 +56,9 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="https://i.pravatar.cc/40?img={{ $loop->iteration }}" class="rounded-circle me-3" alt="ユーザーアバター">
+                            <img src="{{ $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('images/default_profile.png') }}" class="rounded-circle me-3" alt="ユーザーアバター" style="width: 40px; height: 40px; object-fit: cover;">
                                 <div>
-                                    <h5 class="mb-0">{{ $post->user->name }}</h5>
+                                    <h5 class="mb-0">{{ $post->user->nickname }}</h5>
                                     <small class="text-muted">{{ $post->created_at->format('Y年m月d日') }}</small>
                                 </div>
                             </div>
@@ -67,12 +67,14 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-primary me-2">詳細</a>
-                                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary me-2">編集</a>
-                                    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger">削除</button>
-                                    </form>
+                                    @if(Auth::id() === $post->user_id)
+                                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary me-2">編集</a>
+                                        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger">削除</button>
+                                        </form>
+                                    @endif
                                 </div>
                                 <div>
                                     <button class="btn btn-sm btn-outline-secondary me-2">

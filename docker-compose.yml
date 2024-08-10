@@ -24,3 +24,19 @@ services:
       MYSQL_PASSWORD: laravelpassword
     volumes:
       - ./mysql_data:/var/lib/mysql
+      - db-data:/var/lib/mysql
+
+  phpmyadmin:
+    # ここにphpMyAdminの設定を追加
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
