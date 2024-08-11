@@ -41,8 +41,8 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">更新</button>
-                <a href="{{ route('posts.index') }}" class="btn btn-secondary">戻る</a>
+                <button type="submit" class="btn btn-primary custom-btn me-2">更新</button>
+                <a href="{{ route('posts.index') }}" class="btn btn-secondary custom-btn">戻る</a>
             </form>
         </div>
     </div>

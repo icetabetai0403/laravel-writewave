@@ -33,9 +33,11 @@ class PostController extends Controller
             $query->where('title', 'like', "%{$keyword}%");
         }
 
-        if ($request->year && $request->month) {
-            $query->whereYear('created_at', $request->year)
-                    ->whereMonth('created_at', $request->month);
+        $year = $request->year;
+        $month = $request->month;
+        if ($year && $month) {
+            $query->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month);
         }
 
         $sort = $request->input('sort', 'desc');
@@ -46,7 +48,7 @@ class PostController extends Controller
         $posts = $query->withCount(['favorite_users', 'comments'])->paginate(10);
         $total_count = $posts->total();
 
-        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword', 'months', 'sort'));
+        return view('posts.index', compact('posts', 'category', 'categories', 'total_count', 'keyword', 'months', 'sort', 'year', 'month'));
     }
 
     public function show(Post $post)

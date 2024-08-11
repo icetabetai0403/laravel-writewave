@@ -18,6 +18,8 @@
                   <h2 class="h4">{{ $category->name }}の記事一覧 ({{$total_count}}件)</h2>
               @elseif ($keyword !== null)
                   <h2 class="h4">"{{ $keyword }}"の検索結果 ({{$total_count}}件)</h2>
+              @elseif (isset($year) && isset($month))
+                  <h2 class="h4">{{ $year }}年{{ $month }}月の投稿一覧 ({{$total_count}}件)</h2>
               @endif
             </div>
 

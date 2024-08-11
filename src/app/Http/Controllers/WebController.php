@@ -11,8 +11,19 @@ class WebController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $posts = Post::orderBy('created_at', 'desc')->get();
 
-        return view('web.index', compact('posts', 'categories'));
+        $latestPosts = Post::with('user')
+            ->withCount(['favorite_users', 'comments'])
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        $trendingPosts = Post::with('user')
+            ->withCount(['favorite_users', 'comments'])
+            ->orderBy('favorite_users_count', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('web.index', compact('categories', 'latestPosts', 'trendingPosts'));
     }
 }

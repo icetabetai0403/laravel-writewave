@@ -37,14 +37,14 @@
                             <form action="{{ route('favorites.destroy', $post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger">
+                                <button type="submit" class="btn btn-outline-danger custom-btn">
                                     <i class="fas fa-thumbs-up"></i> いいね解除
                                 </button>
                             </form>
                         @else
                             <form action="{{ route('favorites.store', $post->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-primary">
+                                <button type="submit" class="btn btn-outline-primary custom-btn">
                                     <i class="fas fa-thumbs-up"></i> いいね
                                 </button>
                             </form>
@@ -52,11 +52,11 @@
 
                         @if ($post->user_id === Auth::id())
                             <div>
-                                <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary">編集</a>
+                                <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary custom-btn">編集</a>
                                 <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger">削除</button>
+                                    <button type="submit" class="btn btn-outline-danger custom-btn">削除</button>
                                 </form>
                             </div>
                         @endif
@@ -85,11 +85,11 @@
                     <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
                 </div>
                 <input type="hidden" name="post_id" value="{{$post->id}}">
-                <button type="submit" class="btn btn-primary">コメントを追加</button>
+                <button type="submit" class="btn btn-primary custom-btn">コメントを追加</button>
             </form>
             @endauth
 
-            <a href="{{ route('posts.index') }}" class="btn btn-secondary">&lt; 戻る</a>
+            <a href="{{ route('posts.index') }}" class="btn btn-secondary custom-btn">&lt; 戻る</a>
         </div>
     </div>
 </div>
